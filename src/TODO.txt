@@ -1,0 +1,12 @@
+
+
+!!!was able to login, even with redis = down
+
+properly redirect to the last location on reload, does not seem to store the state properly, e.g. employees is always empty after reload
+
+    a function subscribes a feature to a specific data on app store
+ -what we need:
+  - the property name of the data from the app store
+  - the identitier of the data that is needed e.g. _id for specific data from a list
+
+
