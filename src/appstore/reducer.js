@@ -1,4 +1,4 @@
-import types from 'actions/types';//remove this once apiRequestActionTypes is fixed.
+
 import apiRequestActionTypes from '../api/apiRequestActionTypes';
 
 //NOTE: MAKE SURE TO RETURN THE STATE BY DEFAULT
@@ -393,7 +393,7 @@ const psgcReducer = (state = {}, action)=>{
    }
 }
 
-const identityReducer = ( identity = null, action)=>{
+const authenticatedUserReducer = ( authenticatedUserReducer = null, action)=>{
    switch(action.type){
       case "AUTH$LOGIN_EXEC_OK":{
          return action.payload;
@@ -411,7 +411,7 @@ const identityReducer = ( identity = null, action)=>{
          return null;
       }
    }
-   return identity;
+   return authenticatedUserReducer;
 }
 
 const settingsReducer = (settings = {}, action ) => {
@@ -462,7 +462,8 @@ export default (state, action)=>{
       lastActionPayload: action.payload, 
       lastActionMessage: (action.payload || {}).message,
       lastActionError: (action.payload || {}).error, 
-      identity: identityReducer(state.identity,action),
+      // identity: identityReducer(state.identity,action),
+      authenticatedUser: authenticatedUserReducer(state.authenticatedUser,action),
       apis: apisReducer(state.apis,action),
       roles: rolesReducer(state.roles,action),
       employees: employeesReducer(state.employees,action),

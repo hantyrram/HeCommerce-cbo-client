@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useReducer,useEffect} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './App.css';

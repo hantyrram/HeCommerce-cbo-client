@@ -127,9 +127,9 @@ const useTreeItemStyle = makeStyles({
          width: "100%"
       }
    },
-   selected: {
-      backgroundColor: 'blue'
-   }
+   // selected: {
+   //    backgroundColor: 'blue'
+   // }
 })
 
 const useGridStyle = makeStyles({

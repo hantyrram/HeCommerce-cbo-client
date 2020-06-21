@@ -1,0 +1,9 @@
+version: 1.0.1
+appStoreName: hantyr-x-store
+adminurl: admin
+routes: 
+  - LOGIN: login
+  - LOGOUT: logout
+  - AUTHENTICATE: authenticate
+features: 
+  - Admin: 

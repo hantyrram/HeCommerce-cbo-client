@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import AddIcon from '@material-ui/icons/AddCircle';
 import RemoveIcon from '@material-ui/icons/RemoveCircle';
 
-export function CategoryTree({category, data, selected, onSelect , onAdd , onDelete }){
+function CategoryTree({category, data, selected, onSelect , onAdd , onDelete }){
 
    let [c,setC] = useState(category);
    let [mode,setMode] = useState(null);
@@ -183,3 +183,5 @@ CategoryTree.propTypes = {
     */
    onAdd: PropTypes.func,
 }
+
+export default CategoryTree;

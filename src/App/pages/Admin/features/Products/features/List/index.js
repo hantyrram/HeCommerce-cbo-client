@@ -4,14 +4,12 @@ import useAppState from 'appstore/useAppState';
 import useApiRequest from 'api/useApiRequest';
 import ActiveTable from 'components/ActiveTable';
 import Feature from 'components/Feature';
-import {AddNewProduct} from './featureaction';
+import connect from 'appstore/connect';
 
-export default ({history}) => {
+
+
+export const List = ({history, products, getProducts}) => {
    
-   let { getAppState, dispatch } = useAppState();
-   let { products } = getAppState();
-   let getProducts = useApiRequest('PRODUCT_LIST',dispatch);
-
    useEffect(()=>{
       getProducts();
    },[]);
@@ -51,3 +49,5 @@ export default ({history}) => {
       
    )
 }
+
+export default connect({Component: List, actionsToProps: ['getProducts'], stateToProps: ['products']});

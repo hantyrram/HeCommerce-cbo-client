@@ -1,47 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import useAppState from 'appstore/useAppState';
-import useApiRequest from 'api/useApiRequest';
-import feature from '../feature';
-import { CategoryTree } from './components';
+import CategoryTree from './components/CategoryTree';
 import Feature from 'components/Feature';
-// import {
-//    useProductCategory_Create,
-//    useProductCategory_Delete,
-//    useProductCategory_Fetch
-// } from 'actions/ProductCategory';
+import connect from 'appstore/connect';
 
-
-function ProductCategories({history}){
+function ProductCategories({history, getCategories,createCategory,deleteCategory, productCategories}){
    
-   
-   let { getAppState, dispatch} = useAppState();
-   let {productCategories} = getAppState();
    let [selected,setSelected] = useState({_id: 'root'});
-
-   let getCategories = useApiRequest('PRODUCTCATEGORY_LIST',dispatch, ({responseData})=>{
-      return responseData.resource;
-   });
-
-   let createCategory = useApiRequest('PRODUCTCATEGORY_CREATE',dispatch,({responseData})=>{
-      return responseData.resource;
-   });
-   
-   let deleteCategory = useApiRequest('PRODUCTCATEGORY_DELETE',dispatch);
-
-
 
    useEffect(()=>{
       getCategories();
    },[]);
 
-
    function onSelect(s){
-      console.log('Selected: ',s);
       setSelected(s);
    }
 
    function onDelete(category){
-      console.log('Deleting',category);
       (async function(){
          await deleteCategory( 
                {params: {productcategoryId: category._id}}
@@ -83,7 +57,17 @@ function ProductCategories({history}){
    
 }
 
-export default ProductCategories;
+// function ProductCategories(props){
+//    return(
+//       <div>{JSON.stringify(props)}</div>
+//    )
+// }
+
+export default connect({ 
+   Component: ProductCategories, 
+   actionsToProps:['getCategories','createCategory','deleteCategory'], 
+   stateToProps: ['productCategories'] 
+});
 
 
 

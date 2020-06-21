@@ -80,10 +80,12 @@ export default function useApiRequest(requestType, dispatch, onBeforeDispatch = 
     * query = string for now
     */
    return async function({params,payload,query} = {}){
+      
 
       const hasDispatch = dispatch && typeof(dispatch) === 'function';
 
       let type  = requestTypes[requestType];
+      console.log(type);
       if(!type){
          emit('error',{type:'CLIENT_ERROR',text:'Unsupported Api Request Type. Contact Administrator.'});
          return;
