@@ -9,6 +9,18 @@ export const useActions = () => {
    const logout = useApiRequest("AUTH$LOGOUT_EXEC",dispatch);
    const getProducts = useApiRequest("PRODUCT_LIST",dispatch);
 
+   //Attributes
+   
+   const getAttributes = useApiRequest('PRODUCTATTRIBUTE_LIST',dispatch);   
+   const createAttribute = useApiRequest('PRODUCTATTRIBUTE_CREATE',dispatch);
+   const addAttributeTerm = useApiRequest('PRODUCTATTRIBUTE$TERMS_ADD',dispatch,({requestParams,responseData})=>{
+      return {_id: requestParams.productattributeId, terms: [responseData.resource]}
+   });
+   const deleteAttributeTerm = useApiRequest('PRODUCTATTRIBUTE$TERMS_REMOVE',dispatch,({requestParams,requestPayload})=>{
+      console.log(requestPayload);
+      return {_id: requestParams.productattributeId, terms: [requestPayload.term]}
+   });
+
    const getCategories = useApiRequest('PRODUCTCATEGORY_LIST',dispatch, ({responseData})=>{
       return responseData.resource;
    });
@@ -19,6 +31,13 @@ export const useActions = () => {
    
    const deleteCategory = useApiRequest('PRODUCTCATEGORY_DELETE',dispatch);
 
+   //Employees
+   let getEmployees = useApiRequest('EMPLOYEE_LIST',dispatch);
+   let getEmployee = useApiRequest('EMPLOYEE_READ',dispatch);
+   let editEmployee = useApiRequest('EMPLOYEE_EDIT',dispatch);
+   let uploadEmployeePhoto = useApiRequest('EMPLOYEE$PHOTO_EDIT',dispatch);
+   let addEmployee = useApiRequest('EMPLOYEE_ADD',dispatch);
+
    return {
       authenticate,
       login,
@@ -26,7 +45,16 @@ export const useActions = () => {
       getProducts,
       getCategories,
       createCategory,
-      deleteCategory
+      deleteCategory,
+      getAttributes,
+      createAttribute,
+      addAttributeTerm,
+      deleteAttributeTerm,
+      getEmployees,
+      getEmployee,
+      editEmployee,
+      uploadEmployeePhoto,
+      addEmployee
    }
 }
 

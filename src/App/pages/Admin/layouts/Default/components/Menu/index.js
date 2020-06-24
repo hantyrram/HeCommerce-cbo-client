@@ -36,7 +36,7 @@ const useStyle = makeStyles({
       borderRight: "unset"
    },
    minimizeIcon: {
-      fontSize: "4em",
+      fontSize: "3em",
       alignSelf: "flex-end"
    }
 });
@@ -83,10 +83,10 @@ export function Menu ({children, open = false, onClose, ...otherProps}){
       <div id="Admin-Menu">
          <Drawer anchor="left" variant="persistent" open={open} onClose={onClose} classes={classes}>
             <ChevronLeftIcon onClick={onClose} className={classes.minimizeIcon}/>
-            <div id="admin-sidenav-logo-container">
-               <img src="/cbo/apiv1/static/images/hantyr_transparent.png" height="75px" width="85px" alt=""/>
+            <div id="Admin-Menu-logo">
+               <img src="/images/logo.png" height="75px" width="85px" alt=""/>
             </div>
-            <div id="admin-sidenav-menu-container">
+            <div id="Admin-Menu-menu">
                {/* <Link  to="/" style={{width:"100%",display:"flex",justifyContent:"center",  marginTop:"1em",color:"yellow"}}>
                   <DashboardIcon style={{display:"block",fontSize:"3rem"}}/>
                </Link> */}
@@ -109,8 +109,8 @@ export function Menu ({children, open = false, onClose, ...otherProps}){
                      <TreeItem classes={treeItemClasses} nodeId="53" label={<Link    to="/orders/deliveryslips">Delivery Slips</Link>} icon={<ReceiptIcon  fontSize="small"/>} />
                      <TreeItem classes={treeItemClasses} nodeId="54" label={<Link    to="/orders/shoppingcarts">Shopping Carts</Link>} icon={<ShoppingCartIcon  fontSize="small"/>} />
                   </TreeItem>
-                  <TreeItem classes={treeItemClasses} label="Personnel Management" nodeId="2">
-                     <TreeItem classes={treeItemClasses} nodeId="21" label={<Link    to="/hr/employees">Employees</Link>} icon={<SupervisedUserCircleIcon  fontSize="small"/>}/>
+                  <TreeItem classes={treeItemClasses} label="Team" nodeId="2">
+                     <TreeItem classes={treeItemClasses} nodeId="21" label={<Link    to="/team/employees">Employees</Link>} icon={<SupervisedUserCircleIcon  fontSize="small"/>}/>
                   </TreeItem>
                   <TreeItem classes={treeItemClasses} label="Store Setting" nodeId="3">
                      <TreeItem classes={treeItemClasses} nodeId="31" label={<Link    to="/settings/store/general">General</Link>} icon={<SettingsIcon   fontSize="small"/>}/>

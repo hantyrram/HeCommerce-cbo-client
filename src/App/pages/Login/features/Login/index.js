@@ -5,13 +5,37 @@ import useApiRequest from 'api/useApiRequest';
 import useAppState from 'appstore/useAppState';
 import {ErrorBox} from 'components/Feature';
 import { subscribe } from 'actionEvent';
+import Grid from '@material-ui/core/Grid';
+import Container from '@material-ui/core/Container';
+import {makeStyles} from '@material-ui/core/styles';
 import connect from 'appstore/connect';
 import './index.css';
 
+const useStyle = makeStyles(theme=>({
+   root: {
 
+   },
+   grid: {
+      minHeight: "100vh",   
+      display: "flex",
+      alignItems: "center",
+   },
+   formGridItem: {
+      padding: "1em 2.5em",
+      border: "1px solid black",
+      backgroundColor: "white",
+      color: "#94320f",
+      '& > p': {
+         textAlign: "center"
+      }
+   },
+   logo: {
+      textAlign: "center"
+   },
+}));
 
 const Login = ({authenticatedUser, lastAction, login, authenticate}) => {
-
+   const classes = useStyle();
    const { getAppState, dispatch } = useAppState();
    // const login = useApiRequest('AUTH$LOGIN_EXEC',dispatch);
    const [error, setError] = useState(null);
@@ -52,34 +76,39 @@ const Login = ({authenticatedUser, lastAction, login, authenticate}) => {
 
 
    return(
-      <div id="feature-login">
-         <div style={{display:"flex", justifyContent:"center"}}>
-            <img height="150px" width="200px" src="/images/hantyr_transparent.png" alt="logo"/>
-         </div>
-         { error && getAppState().lastAction === 'AUTH$LOGIN_EXEC_NOK' ? <ErrorBox error={error} /> : null }
-
-         <form action="" onSubmit = {onSubmit} className="grid-form">
-            <div className="form-control">
-               <h3>Login</h3>
-               <hr/>
-            </div>
-            <div className="form-control">
-               <label htmlFor="username">Username </label>
-               <input type="text" name="username" value={values.username} onChange={onChange} className="form-control-input"/>
-               <span className="form-input-error">{errors && errors.username}</span>
-            </div>
-            <div className="form-control">
-               <label htmlFor="password">Password </label>
-               <input type="password" name="password" value={values.password} onChange={onChange} className="form-control-input"/>
-               <span className="form-input-error">{errors && errors.password}</span>
-            </div>
-            <div className="form-control-action">
-               <Button id="btn-login" type="submit" variant="contained" >
-                  Login
-               </Button> 
-            </div>
-      </form>   
-      </div>
+      // <div id="feature-login">
+      // <Container>
+         <Grid container direction="column" justify="center" alignItems="center" className={classes.grid}>
+            <Grid item xs="12" sm="6" className={classes.logo}>
+                  <img height="150px" width="150px" src="/images/logo.png" alt="logo"/>
+            </Grid>
+            <Grid item xs="12" sm="8">
+               { error && getAppState().lastAction === 'AUTH$LOGIN_EXEC_NOK' ? <ErrorBox error={error} /> : null }
+               
+            </Grid>
+            <Grid item xs="12" sm="8" className={classes.formGridItem}>
+                  <p>Welcome admin, please sign in</p>
+                  <form id="frm-Login" action="" onSubmit = {onSubmit} className="grid-form">
+                     <div className="form-control">
+                        <label htmlFor="username">Username </label>
+                        <input type="text" name="username" value={values.username} onChange={onChange} className="form-control-input" required/>
+                        <span className="form-input-error">{errors && errors.username}</span>
+                     </div>
+                     <div className="form-control">
+                        <label htmlFor="password">Password </label>
+                        <input type="password" name="password" value={values.password} onChange={onChange} className="form-control-input" required/>
+                        <span className="form-input-error">{errors && errors.password}</span>
+                     </div>
+                     <div className="form-control-action">
+                        <Button id="btn-login" type="submit" variant="contained" color="primary">
+                           Login
+                        </Button> 
+                     </div>
+                  </form>   
+            </Grid>
+         </Grid>
+      // </Container>
+      // </div>
    )
 }
 

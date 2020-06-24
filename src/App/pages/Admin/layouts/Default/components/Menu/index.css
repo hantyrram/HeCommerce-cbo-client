@@ -2,3 +2,9 @@
    background-color: var(--shade-primary-one);
    color: var(--forecolor-primary-one) !important;
 }
+#Admin-Menu-logo{
+   text-align: center;
+}
+#Admin-Menu-menu{
+   padding-left: 2em;
+}

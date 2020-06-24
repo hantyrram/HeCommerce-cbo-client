@@ -10,6 +10,9 @@ import {createMuiTheme, ThemeProvider} from '@material-ui/core/styles';
 import LoginPage from './pages/Login';
 import AdminPage from './pages/Admin';
 import AppConfig from 'App.config.json';
+import blue from '@material-ui/core/colors/blue';
+import red from '@material-ui/core/colors/red';
+import Button from '@material-ui/core/Button';
 
 /**
  * App's entry point.
@@ -17,24 +20,31 @@ import AppConfig from 'App.config.json';
  * @author Ronaldo Ramano
  */
 
-const THEME = 'dark';
+// const THEME = 'dark';
 
-const DARK = {
+const THEME = {
    primaryBackgroundZero:  "#040303eb",
    primaryBackgroundOne: "#040303d9",
    primaryBackgroundTwo: "#04030378",
    primaryBackgroundThree: "#04030359",
    primaryBackgroundTen: "#0403031c",
    primaryColorZero: "white",
-   primaryColorOne: "#b1b0b0"
+   primaryColorOne: "#b1b0b0",
+   palette: {
+      primary: {
+         main: blue[500]
+      },
+      secondary: {
+         main: red[600]
+      }
+   }
 }
 
 const LIGHT = {
 
 }
 
-const theme = createMuiTheme(DARK); // this can come from a user preference
-
+const theme = createMuiTheme(THEME); // this can come from a user preference
 function App(props){
 
    const { getAppState } = useAppState();

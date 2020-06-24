@@ -8,7 +8,7 @@ body {
       /* "-apple-system", "BlinkMacSystemFont", */
    -webkit-font-smoothing: antialiased;
    -moz-osx-font-smoothing: grayscale;
-   font-size: .9em;
+   /* font-size: .9em; */
    /* ie hide scrollbar/keep functionality */
    -ms-overflow-style: none;
    min-height: 100vh;
@@ -29,6 +29,7 @@ select {
 }
 a {
    text-decoration: none;
+   color: #677eea;
 }
 
 code {

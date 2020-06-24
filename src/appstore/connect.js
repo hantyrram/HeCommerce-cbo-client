@@ -34,7 +34,7 @@ export const connect = ({Component, actionsToProps, stateToProps}) => {
          //Actions to be added as props to the Component
          const componentAction = {};
          //appstore States to be added as props to the Component
-         const states = {};
+         let states = {};
          if(actionsToProps){
             for( let a of actionsToProps ){
                let action = actions[a];
@@ -47,7 +47,9 @@ export const connect = ({Component, actionsToProps, stateToProps}) => {
 
          if(stateToProps){
             if(typeof(stateToProps) === "function"){
-               states = stateToProps(getAppState());
+               // will also pass the props so the  function can access the props passed by the parent component
+               //example if connect() is behind a Route stateToProps() can receive the { match,history ...} object
+               states = stateToProps(getAppState(), props); 
             }else{
                for( let key of stateToProps ){
                   states[key] = getAppState()[key];
