@@ -38,6 +38,25 @@ export const useActions = () => {
    let uploadEmployeePhoto = useApiRequest('EMPLOYEE$PHOTO_EDIT',dispatch);
    let addEmployee = useApiRequest('EMPLOYEE_ADD',dispatch);
 
+   //UserAccounts
+   let getUserAccounts = useApiRequest('USERACCOUNT_LIST',dispatch, ({responseData})=>{
+      return responseData.resource;
+   });
+
+   let getUserAccount = useApiRequest('USERACCOUNT_READ',dispatch);
+
+   let addRoleToUserAccount = useApiRequest('USERACCOUNT$ROLES_ADD',dispatch,({requestParams,responseData})=>{
+      return {username: requestParams.username, role: responseData.resource};
+   });
+
+   //Roles
+   let getRoles = useApiRequest('ROLE_LIST',dispatch);
+
+   let deleteRoleFromUserAccount =  useApiRequest('USERACCOUNT$ROLES_DELETE',dispatch,({requestParams})=>{
+      return {username: requestParams.username, roleId: requestParams.roleId}
+   });
+      
+
    return {
       authenticate,
       login,
@@ -54,7 +73,12 @@ export const useActions = () => {
       getEmployee,
       editEmployee,
       uploadEmployeePhoto,
-      addEmployee
+      addEmployee,
+      getUserAccounts,
+      getUserAccount,
+      getRoles,
+      addRoleToUserAccount,
+      deleteRoleFromUserAccount
    }
 }
 

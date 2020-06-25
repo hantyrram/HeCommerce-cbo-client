@@ -19,14 +19,23 @@ body::-webkit-scrollbar{
    display: none;
 }
 
-input, select {
+/* input, select {
    color: #595555;
-   min-height: 1.5em;
+   min-height: 2.5rem;
+} */
+
+form input, select {
+   height: 2rem;
+   border: .5px solid #9e9e9e;
+   font-size: medium;
+   color: #545454;
+   padding-left: .5rem;
 }
 
-select {
+
+/* select {
    height: 2em;
-}
+} */
 a {
    text-decoration: none;
    color: #677eea;
@@ -41,7 +50,6 @@ input {
    font-family: "Segoe UI", "Roboto", "Oxygen",
       "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
       sans-serif;
-   padding-left: 1em;   
 }
 
 :root{

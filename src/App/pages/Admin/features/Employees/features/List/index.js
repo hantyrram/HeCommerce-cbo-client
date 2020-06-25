@@ -11,7 +11,7 @@ function List({history, getEmployees, employees}){
    },[]);
 
    const onRowClick = (rowData)=>{
-      history.replace(`/team/employees/${rowData._id}`, {state: rowData});
+      history.replace(`/team/employees/${rowData._id}/view`, {state: rowData});
    }
 
    const columnHeaders = [
@@ -26,8 +26,11 @@ function List({history, getEmployees, employees}){
    ]
 
    let data =  employees.reduce(function(acc,element){
-                  let {_id,employeeId,identity,joiningDate,mobileNo} = element;
+                  
+                  let {_id,employeeId,identity,contactInfo,employmentInfo} = element;
                   let {firstname,middlename,lastname,gender,dateOfBirth} = identity;
+                  let {joiningDate} = employmentInfo || {};
+                  let {mobileNo} = contactInfo || {};
                   acc.push({_id,employeeId,firstname,middlename,lastname,gender,dateOfBirth,joiningDate,mobileNo});
                   return acc;
                },[])

@@ -24,41 +24,50 @@ function TabContent({children, index,value}){
    )
 }
 
+/**
+ * Employee Form
+ * 
+ */
 function Form({ data = {}, title, addEmployeeAction: addEmployee, editEmployeeAction: editEmployee, uploadEmployeePhotoAction: uploadEmployeePhoto}) {
    
+   console.log(data);
 
    let date = new Date();
 
-   let exec = () => {};
+   //editEmployee wrapper only
+   const doEditEmployee = (changedValues) => {
+      //add _id on payload
+      editEmployee({ params: {_id : data._id}, payload: { _id: data._id, ...changedValues} });
+   } 
 
-   if( !data._id ){
-      exec = addEmployee;
-   }
-
+   //personal info/ identity form onSubmitCallback
    const identityFormSC = (v)=>{
-      console.log(v);
       let payload = { identity: v.values };
-
       if(!data._id){
          if(addEmployee){
             addEmployee({ payload })
          }
       }else{
          if(editEmployee){
-            editEmployee({ params: {_id : data._id}, payload });
+            doEditEmployee(v.changedValues);
          }
       }
    };
+   //address form onSubmitCallback
    const addressFormSC = (v)=>{
-      console.log(v);
+
+      doEditEmployee({address: v.changedValues});
    };
 
+   //contactInfo form onSubmitCallback
    const contactInfoFormSC = (v)=>{
-      console.log(v);
+      doEditEmployee({contactInfo:v.changedValues});
    }
 
+   //employmentInfo form onSubmitCallback
    const employmentInfoFormSC = (v)=>{
       console.log(v);
+      doEditEmployee({employmentInfo:v.changedValues});
    }
 
    const identityForm = useForm({ initialValues: data.identity || {}, onSubmitCallback: identityFormSC});
@@ -66,7 +75,7 @@ function Form({ data = {}, title, addEmployeeAction: addEmployee, editEmployeeAc
    const contactInfoForm = useForm({ initialValues: data.contactInfo || {}, onSubmitCallback: contactInfoFormSC});
    const employmentInfoForm = useForm({ initialValues: data.employmentInfo || {}, onSubmitCallback: employmentInfoFormSC});
 
-   //if data.identity has no property//incomplete disable the other tabs
+   
 
    let initialFormState = {
       identity: {},
@@ -137,27 +146,32 @@ function Form({ data = {}, title, addEmployeeAction: addEmployee, editEmployeeAc
                   <div  className="form-control">
                   <label htmlFor="country">Country</label>
                   {/* change to select */}
-                  <input type="text" name="country" value={addressForm.country} onChange={addressForm.onChange}/>
+                  <input type="text" name="country" value={addressForm.values.country} onChange={addressForm.onChange} required/>
                   <span className="form-input-error">{addressForm.errors && addressForm.errors.country}</span>
                </div>
                <div  className="form-control">
-                  <label htmlFor="city">City</label>
-                  <input type="text" name="city" value={addressForm.city} onChange={addressForm.onChange}/>
+                  <label htmlFor="province">Province</label>
+                  <input type="text" name="province" value={addressForm.values.province} onChange={addressForm.onChange} required/>
+                  <span className="form-input-error">{addressForm.errors && addressForm.errors.province}</span>
+               </div>
+               <div  className="form-control">
+                  <label htmlFor="city">City / Municipality</label>
+                  <input type="text" name="city" value={addressForm.values.city} onChange={addressForm.onChange} required/>
                   <span className="form-input-error">{addressForm.errors && addressForm.errors.city}</span>
                </div>
                <div  className="form-control">
-                  <label htmlFor="street">Address</label>
-                  <input type="text" name="street" value={addressForm.street} onChange={addressForm.onChange}/>
+                  <label htmlFor="street">Street</label>
+                  <input type="text" name="street" value={addressForm.values.street} onChange={addressForm.onChange} required/>
                   <span className="form-input-error">{addressForm.errors && addressForm.errors.street}</span>
                </div>
                <div  className="form-control">
                   <label htmlFor="bldgNo">Building / House No. / Apartment No.</label>
-                  <input type="text" name="street" value={addressForm.bldgNo} onChange={addressForm.onChange}/>
+                  <input type="text" name="bldgNo" value={addressForm.values.bldgNo} onChange={addressForm.onChange}/>
                   <span className="form-input-error">{addressForm.errors && addressForm.errors.bldgNo}</span>
                </div>
                <div  className="form-control">
                   <label htmlFor="zipcode">Zip Code</label>
-                  <input type="text" name="zipcode" value={addressForm.zipcode} onChange={addressForm.onChange}/>
+                  <input type="text" name="zipcode" value={addressForm.values.zipcode} onChange={addressForm.onChange} required/>
                   <span className="form-input-error">{addressForm.errors && addressForm.errors.zipcode}</span>
                </div>
                <div className="form-control-action">
@@ -166,26 +180,26 @@ function Form({ data = {}, title, addEmployeeAction: addEmployee, editEmployeeAc
             </form>   
          </TabContent>
          <TabContent index={2} value={tabsValue} disabled>
-            <form id="frm-Employee-ContactInfo"action="#" onSubmit={addressForm.onSubmit} className="grid-form">
+            <form id="frm-Employee-ContactInfo"action="#" onSubmit={contactInfoForm.onSubmit} className="grid-form">
                   <div  className="form-control">
                   <label htmlFor="email">Personal Email</label>
-                     <input type="email" name="email"  value={contactInfoForm.email} onChange={contactInfoForm.onChange}/>
+                     <input type="email" name="email"  value={contactInfoForm.values.email} onChange={contactInfoForm.onChange}/>
                      <span className="form-input-error">{contactInfoForm.errors && contactInfoForm.errors.email}</span>
                   </div>
                   <div  className="form-control">
                      <label htmlFor="mobileNo">Personal Mobile No.</label>
-                     <input type="text" name="mobileNo" value={contactInfoForm.mobileNo} onChange={contactInfoForm.onChange}/>
+                     <input type="text" name="mobileNo" value={contactInfoForm.values.mobileNo} onChange={contactInfoForm.onChange}/>
                      <span className="form-input-error">{contactInfoForm.errors && contactInfoForm.errors.mobileNo}</span>
                   </div>
                   <div  className="form-control">
-                     <label htmlFor="companyIssuedEmail">Internal Email</label>
-                     <input type="email" name="companyIssuedEmail" value={contactInfoForm.companyIssuedEmail} onChange={contactInfoForm.onChange}/>
-                     <span className="form-input-error">{contactInfoForm.errors && contactInfoForm.errors.companyIssuedEmail}</span>
+                     <label htmlFor="companyEmail">Internal Email</label>
+                     <input type="email" name="companyEmail" value={contactInfoForm.values.companyEmail} onChange={contactInfoForm.onChange}/>
+                     <span className="form-input-error">{contactInfoForm.errors && contactInfoForm.errors.companyEmail}</span>
                   </div>
                   <div  className="form-control">
-                     <label htmlFor="companyIssuedMobileNo">Internal Mobile No.</label>
-                     <input type="text" name="companyIssuedMobileNo" value={contactInfoForm.companyIssuedMobileNo} onChange={contactInfoForm.onChange}/>
-                     <span className="form-input-error">{contactInfoForm.errors && contactInfoForm.errors.companyIssuedMobileNo}</span>
+                     <label htmlFor="companyMobileNo">Internal Mobile No.</label>
+                     <input type="text" name="companyMobileNo" value={contactInfoForm.values.companyMobileNo} onChange={contactInfoForm.onChange}/>
+                     <span className="form-input-error">{contactInfoForm.errors && contactInfoForm.errors.companyMobileNo}</span>
                   </div>
                <div className="form-control-action">
                   <Button type="submit" variant="contained" color="primary">Save</Button>
@@ -194,26 +208,35 @@ function Form({ data = {}, title, addEmployeeAction: addEmployee, editEmployeeAc
          </TabContent>
          <TabContent index={3} value={tabsValue} >
             <form id="frm-Employee-EmploymentInfo" action="#" onSubmit={employmentInfoForm.onSubmit} className="grid-form">
-               <hr/>
                <div  className="form-control">
                   <label htmlFor="joiningDate">Joining Date</label>
-                  <input type="date" name="joiningDate"  value={employmentInfoForm.joiningDate} onhange={employmentInfoForm.onChange}/>
+                  <input type="date" name="joiningDate"  value={employmentInfoForm.values.joiningDate} onChange={employmentInfoForm.onChange}/>
                   <span className="form-input-error">{employmentInfoForm.errors && employmentInfoForm.errors.joiningDate}</span>
                </div>
                <div  className="form-control">
                   <label htmlFor="jobTitle">Job Title</label>
-                  <input type="text" name="jobTitle" value={employmentInfoForm.jobTitle} onChange={employmentInfoForm.onChange}/>
+                  <input type="text" name="jobTitle" value={employmentInfoForm.values.jobTitle} onChange={employmentInfoForm.onChange}/>
                   <span className="form-input-error">{employmentInfoForm.errors && employmentInfoForm.errors.jobTitle}</span>
                </div>
                <div  className="form-control">
                   <label htmlFor="designation">Designation</label>
-                  <input type="text" name="designation" value={employmentInfoForm.designation} onChange={employmentInfoForm.onChange}/>
+                  <input type="text" name="designation" value={employmentInfoForm.values.designation} onChange={employmentInfoForm.onChange}/>
                   <span className="form-input-error">{employmentInfoForm.errors && employmentInfoForm.errors.designation}</span>
                </div>
                <div  className="form-control">
                   <label htmlFor="department">Department</label>
-                  <input type="text" name="department" value={employmentInfoForm.department} onChange={employmentInfoForm.onChange}/>
+                  <input type="text" name="department" value={employmentInfoForm.values.department} onChange={employmentInfoForm.onChange}/>
                   <span className="form-input-error">{employmentInfoForm.errors && employmentInfoForm.errors.department}</span>
+               </div>
+               <div  className="form-control">
+                  <label htmlFor="status">Employment Status</label>
+                  <select name="status" value={employmentInfoForm.values.status} onChange={employmentInfoForm.onChange} required>
+                     <option value={null}>Select Status</option>
+                     <option value="active">Active</option>
+                     <option value="onleave">On Leave</option>
+                     <option value="resigned">Resigned</option>
+                  </select>
+                  <span className="form-input-error">{employmentInfoForm.errors && employmentInfoForm.errors.status}</span>
                </div>
                <div className="form-control-action">
                   <Button type="submit" variant="contained" color="primary">Save</Button>

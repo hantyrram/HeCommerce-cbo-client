@@ -102,7 +102,7 @@ const ActiveTable = (props)=>{
                      let tdValue = String(dObj[pName]); ///??? convert all to string temporarily, because array value would result an error
                      return (
                         <TableCell key={ii} style={{display: (props.hidden || []).includes(hObj)?'none':'', cursor: 'default'}} >
-                           { tdValue }
+                           { tdValue === "undefined" ? (props.noCellValueCaption || <i className="ActiveTable-Cell-notset">not set</i>) :  tdValue  }
                         </TableCell>
                      )
                   })
@@ -205,7 +205,12 @@ ActiveTable.propTypes = {
     * The text shown when there is no data, default = < No Data >
     * 
     */
-   noDataCaption: PropTypes.string
+   noDataCaption: PropTypes.string,
+
+   /**
+    * The text shown when a particular row cell is undefined / no value
+    */
+   noCellValueCaption: PropTypes.string,
 }
 
 

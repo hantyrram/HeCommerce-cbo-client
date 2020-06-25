@@ -20,6 +20,10 @@ const AddEmployee =
    React.lazy(()=> import(/*webpackChunkName: "feature.employees.add" */'App/pages/Admin/features/Employees/features/Add'));    
 const ViewEmployee = 
    React.lazy(()=> import(/*webpackChunkName: "feature.employees.view" */'App/pages/Admin/features/Employees/features/View'));    
+const UserAccounts = 
+   React.lazy(()=> import(/*webpackChunkName: "feature.useraccounts" */'App/pages/Admin/features/UserAccounts'));    
+const ViewUserAccount = 
+   React.lazy(()=> import(/*webpackChunkName: "feature.useraccounts.view" */'App/pages/Admin/features/UserAccounts/features/View'));       
 
 const CATALOG = "Catalog";
 const ORDERS = "Orders";
@@ -87,6 +91,19 @@ export const ADD_EMPLOYEE = {
    Component: AddEmployee
 }
 
+export const USER_ACCOUNTS = {
+   path: "/admin/useraccounts", 
+   name: "User Accounts", 
+   featureGroup: WEB_ADMINISTRATION, 
+   Component: UserAccounts
+}
+
+export const VIEW_USERACCOUNT = {
+   path: "/admin/useraccounts/:_owner/view", 
+   name: "View User Account", 
+   featureGroup: WEB_ADMINISTRATION, 
+   Component: ViewUserAccount
+}
 
 
 export default [
@@ -97,7 +114,9 @@ export default [
    PRODUCTATTRIBUTES,
    EMPLOYEES,
    VIEW_EMPLOYEE,
-   ADD_EMPLOYEE
+   ADD_EMPLOYEE,
+   USER_ACCOUNTS,
+   VIEW_USERACCOUNT
 ]
 
 

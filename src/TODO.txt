@@ -1,3 +1,6 @@
 Employee View edit add address, personal info employment info
 change the color of address, personal info tabs if it's still not fullfilled
-upload to me.hantyr.com
+
+Employee address, contact, employment info save
+
+Make John Doe a Demo user account

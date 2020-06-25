@@ -98,7 +98,7 @@ input .large {
    height:3em;
 }  
 
-label.required::after{
+input[required] + label:after{
    content: " *";
    color: red;
 }

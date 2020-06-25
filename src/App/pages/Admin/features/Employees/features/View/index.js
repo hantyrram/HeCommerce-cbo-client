@@ -9,7 +9,7 @@ import connect from 'appstore/connect';
 function View({match, getEmployee, editEmployee, uploadEmployeePhoto, employee}){
    const AddNewEmployeeFA = (props) => <Link to="/team/employees/add" {...props}>Add New Employee</Link>
    return(
-      <Feature title={`Employee Profile : ${employee.employeeId}`} actions={[<AddNewEmployeeFA className="feature-action contained primary"/>]}>
+      <Feature title={`Employee Id : ${employee.employeeId}`} actions={[<AddNewEmployeeFA className="feature-action contained primary"/>]}>
          <EmployeeForm data={employee} editEmployeeAction={editEmployee} uploadEmployeePhotoAction={uploadEmployeePhoto}/>
       </Feature>
    )
