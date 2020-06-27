@@ -1,19 +1,20 @@
-import React, { useContext,useEffect,useState } from 'react';
+import React, { useState } from 'react';
 
-import useAppState from 'appstore/useAppState';
-import useApiRequest from 'api/useApiRequest';
 import Feature from 'components/Feature';
 import ActiveTable from 'components/ActiveTable';
 import Dialog from '@material-ui/core/Dialog';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
-import IconButton from '@material-ui/core/IconButton';
 import connect from 'appstore/connect';
 
-export function View({match,location,userAccount, roles,getUserAccount,getRoles, addRoleToUserAccount,deleteRoleFromUserAccount}){
+export function View({match,location, userAccount, roles,getUserAccount,getRoles, addRoleToUserAccount,deleteRoleFromUserAccount}){
    let { params: { _owner } } = match; 
 
-   let [openAddRoleDialog,setOpenAddRoleDialog] = useState(false);
+   const [openAddRoleDialog,setOpenAddRoleDialog] = useState(false);
+   const [selectedRole,setSelectedRole] = useState(null);
 
    const onUserAccountRoleDelete = (role)=>{
       console.log(role);
@@ -76,22 +77,44 @@ export function View({match,location,userAccount, roles,getUserAccount,getRoles,
             <hr />
             <div style={{display:"inline-block"}}><Button onClick={addRoleClickHandler} variant="outlined" size="small" color="primary"> <AddIcon /> Add Role to User Account</Button></div>
          </div>
-         <ActiveTable data={userAccount.roles} 
+         {/* UserAccount roles table */}
+         <ActiveTable id="tbl-Admin-UserAccounts-View_userAccountRoles" data={userAccount.roles} 
             columnHeaders={rolesColumnHeaders}
             hidden={['_id','permissions']}
             onRowDelete={onUserAccountRoleDelete}
          />
-         <Dialog open={openAddRoleDialog} >
-            <ActiveTable 
-               data={roles} 
-               columnHeaders={rolesColumnHeaders}
-               hidden={['_id','permissions']}
-               onRowSelect={rolesRowSelectHandler}
-            />
-            <div>
+         {/* add role to UserAccount dialog */}
+         <Dialog id="dlg-Admin-UserAccounts-View_addRoleToUserAccount" open={openAddRoleDialog} fullWidth >
+            <DialogTitle>Add Role</DialogTitle>
+            <DialogContent>
+               <ActiveTable 
+                  data={roles} 
+                  columnHeaders={rolesColumnHeaders}
+                  hidden={['_id','permissions']}
+                  onRowSelect={({selected,rowdata})=>{
+                     if(selected){
+                        setSelectedRole(rowdata)
+                     }
+                  }}
+               />
+            </DialogContent>            
+            <DialogActions>
                <Button onClick={()=>setOpenAddRoleDialog(false)} color="secondary" variant="contained"> Cancel </Button>
-            </div>
+               <Button onClick={() => {
+                     addRoleToUserAccount({
+                        params: {
+                           username: userAccount.credential.username,
+                           ownerType: userAccount.ownerType
+                        },
+                        payload: selectedRole
+                     });                 
+                     setOpenAddRoleDialog(false)
+                  }
+               }
+                color="primary" variant="contained"> Ok </Button>
+            </DialogActions>
          </Dialog>
+
       </Feature>
       
    )

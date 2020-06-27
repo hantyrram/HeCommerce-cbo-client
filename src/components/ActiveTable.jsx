@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect,useState } from 'react';
 import PropTypes from 'prop-types';
 import Table from '@material-ui/core/Table';
 import TableHead from '@material-ui/core/TableHead';
@@ -24,8 +24,17 @@ const useActionColumnStyles = makeStyles({
     }
 });
 
-const ActiveTable = (props)=>{
+const useStyle = makeStyles(theme=>({
+   root: {
+      border: "1px solid #c7c7c7"
+   },
+   header: {
+      backgroundColor: "#dadada"
+   }
+}))
 
+const ActiveTable = (props)=>{
+   const classes = useStyle();
    let tableRef = useRef(null);
    let checkboxRef = useRef(null);
    const tableRowClasses = useTableRowStyles();
@@ -57,13 +66,18 @@ const ActiveTable = (props)=>{
          return null;
       }
 
-      const checkboxChangeHandler = (e)=>{
+      const changeHandler = (e)=>{
          props.onRowSelect({selected: e.target.checked, rowdata: dObj});
       }
       
       return (
          <TableCell >
-            <input type="checkbox" onChange={checkboxChangeHandler}/>
+            
+            {
+               props.multiSelect ?
+                  <input type="checkbox" onChange={changeHandler}/>
+               : <input type="radio" name="select" onChange={changeHandler}/>
+            }
          </TableCell>
       )
 
@@ -148,35 +162,31 @@ const ActiveTable = (props)=>{
          }
       }
    },[props.onRowClick,props.data]);
-
-   // useEffect(addCheckboxChangeListener,[props.onRowSelect]);
-
-   if(!props.data || props.data.length === 0){
-      if(!props.showHeadersOnNoData){
-         return(
-            <div className="active-table" style={{maxWidth:"100%",textAlign:"center"}}>
-               { props.noDataCaption || '< No Data >'}
-            </div>
-         )
-      }
-      return(
-         <div className="active-table" style={{maxWidth:"100%"}}>
-         <Table ref={tableRef} size="small">
-            <TableHead><tr>{renderColumnHeaders()}</tr></TableHead>
-            <TableBody>
-               <tr><td colspan={3} style={{textAlign:"center"}}> {props.noDataCaption || '< No Data >'}</td></tr>
-            </TableBody>
-         </Table>
-         </div>
-      )
-      
-   }
    
    return(
-      <div className="active-table" style={{width:"100%",maxWidth:"100%"}}>
+      <div className={classes.root} style={{width:"100%",maxWidth:"100%"}}>
          <Table ref={tableRef} size="small">
-            <TableHead><tr>{renderColumnHeaders()}</tr></TableHead>
-            <TableBody>{renderRows()}</TableBody>
+            {/* <TableHead><tr>{renderColumnHeaders()}</tr></TableHead> */}
+            {/* <TableBody>{renderRows()}</TableBody> */}
+            <TableHead className={classes.header}>
+               <tr>
+                  { 
+                     props.onRowSelect ? 
+                        <TableCell component="th" key={'select-th'}> 
+                           {props.selectColumnHeader || 'Select'} 
+                        </TableCell> 
+                     : null
+                  }
+                  { renderColumnHeaders() }
+               </tr>
+            </TableHead>
+            <TableBody>
+               {
+                  !props.data || props.data.length === 0 ?
+                     <tr><td colspan={3} style={{textAlign:"center"}}> {props.noDataCaption || '< No Data >'}</td></tr>
+                  : renderRows()
+               }
+            </TableBody>
          </Table>
       </div>
       
@@ -190,7 +200,27 @@ ActiveTable.propTypes = {
     * @param {object} rowdata The data of the current row, including hidden data.
     */
    onRowClick: PropTypes.func, 
+   /**
+    * If present ActiveTable displays a Checkbox on each row. The function is called when a row
+    * is checked/selected. It's upto the user on how to handle the data
+    * @function
+    * @param {Object} - Contains the data of the selected/checked row
+    * { 
+    *    selected: <true,false> - true if the selected row is checked, false if unchecked
+    *    rowData: <The data of the checked row>
+    * }
+    */
    onRowSelect: PropTypes.func, // function called if row is selected, optional
+   /**
+    * The header of the checkboxes column if onRowSelect props is present
+    * @default ''
+    */
+   selectColumnHeader: PropTypes.string,
+   /**
+    * Uses checkbox, allows multiple row selection
+    * @default true
+    */
+   multiSelect: PropTypes.bool,
    rowHoverColor: PropTypes.string, // color of the row on mouse hover
    rowActionHandlers: PropTypes.array, // optional array of functions that accept the rowdata, must return a Component e.g. button
    data: PropTypes.array, //array of objects

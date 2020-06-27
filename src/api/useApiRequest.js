@@ -87,7 +87,7 @@ export default function useApiRequest(requestType, dispatch, onBeforeDispatch = 
       let type  = requestTypes[requestType];
       console.log(type);
       if(!type){
-         emit('error',{type:'CLIENT_ERROR',text:'Unsupported Api Request Type. Contact Administrator.'});
+         emit('error',{type:'CLIENT_ERROR',text:'Unsupported Operation. Contact Administrator.'});
          return;
       }
 
@@ -96,7 +96,7 @@ export default function useApiRequest(requestType, dispatch, onBeforeDispatch = 
       let requestMethod = api.substr(0,indexOfRequestMethodSeparator); // get the request method portion of the path
 
       if(!HTTP_REQUEST_METHODS.includes(requestMethod)){
-         emit('error',{type:'CLIENT_ERROR',text:'Unsupported Api Request Method. Contact Administrator.'});
+         emit('error',{type:'CLIENT_ERROR',text:'Unsupported Operation. Contact Administrator.'});
          return;
       }
 
@@ -154,7 +154,7 @@ export default function useApiRequest(requestType, dispatch, onBeforeDispatch = 
          emit('error',data.error);
          return data.error;
       } catch (error) {//NOTE 400 status codes are thrown
-         console.log(error);
+         console.dir(error);
          if(error.response && error.response.data && error.response.data.error){
               //error.response.data.error = actual server generated error object 
                if(hasDispatch){

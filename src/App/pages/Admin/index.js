@@ -65,7 +65,6 @@ export const Admin = ({authenticatedUser, logout}) => {
                      {
                         routes.map( ( { path, Component} ) => 
                            {
-                              console.log(Component);
                               return <Route exact path={path} component={Component}/>
                            }
                            
