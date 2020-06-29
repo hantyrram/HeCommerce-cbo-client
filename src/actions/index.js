@@ -70,6 +70,10 @@ export const useActions = () => {
    const generateCredential = useApiRequest('USERACCOUNT$CREDENTIAL$GENERATE_EXEC',dispatch);   
    const createUserAccountCredential = useApiRequest('USERACCOUNT$CREDENTIAL_CREATE',dispatch);
 
+   //products
+   const addProduct = useApiRequest('PRODUCT_CREATE',dispatch);
+   const updateProductCategory = useApiRequest('PRODUCT$CATEGORY_EDIT',dispatch);
+
    return {
       authenticate,
       login,
@@ -94,7 +98,9 @@ export const useActions = () => {
       addRoleToUserAccount,
       deleteRoleFromUserAccount,
       generateCredential,
-      createUserAccountCredential
+      createUserAccountCredential,
+      addProduct,
+      updateProductCategory
    }
 }
 

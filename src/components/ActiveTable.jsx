@@ -178,8 +178,16 @@ const ActiveTable = (props)=>{
                      : null
                   }
                   { renderColumnHeaders() }
+                  {
+                     props.onRowDelete ? 
+                        <TableCell component="th" key={'action-th'} > 
+                           Action
+                        </TableCell>  
+                     : null
+                  }
                </tr>
             </TableHead>
+           
             <TableBody>
                {
                   !props.data || props.data.length === 0 ?

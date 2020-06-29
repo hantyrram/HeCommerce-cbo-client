@@ -5,9 +5,6 @@ import connect from 'appstore/connect';
 import useForm from 'hooks/useForm';
 import Button from '@material-ui/core/Button';
 
-
-const ViewUserAccounts = (props) => <Link to="/useraccounts">View User Accounts</Link> 
-
 export function UserAccountCreate({verifyEmployee,generateCredential,createUserAccountCredential}){
    const DEFAULT_OWNER_TYPE = 'Employee';
    const [employeeVerified,setEmployeeVerified] = useState(null);
@@ -67,7 +64,7 @@ export function UserAccountCreate({verifyEmployee,generateCredential,createUserA
 
    return(
       
-      <Feature title="Create New User Account" actions={[<ViewUserAccounts className="feature-action contained primary"/>]}>
+      <Feature title="Create New User Account" >
          <form id="frm-Admin-UserAccounts-Create_VerifyEmployee" action="" onSubmit={verifyEmployeeForm.onSubmit} className="grid-form">
             <div className="form-control">
                <label htmlFor="ownerType">Select Owner Type</label>
