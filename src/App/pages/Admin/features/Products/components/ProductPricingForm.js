@@ -28,8 +28,9 @@ export default function PricingForm({ product, editProduct}){
                   <input type="text" name="discounted" id="price-discounted" value={values.discounted} onChange={onChange}/>                  
                   <label className="field-description">Will be shown as the current price if set </label>
                </div>
-               <Button type="submit" variant="contained">Set Price</Button>
-               
+               <div className="form-control-action">
+                  <Button type="submit" variant="contained" color="primary">Set Price</Button>
+               </div>
          </form>
    )
 }

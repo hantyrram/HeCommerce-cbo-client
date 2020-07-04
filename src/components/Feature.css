@@ -72,6 +72,7 @@
    margin:1em;
    display:block;
    align-items: center;
+   color: #4c4a4a;
 }
 
 .feature-context-wrapper{/* wraps the feature context actual content*/

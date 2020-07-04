@@ -139,7 +139,7 @@ export default function ProductInventoryForm({ product, editProduct}){
                </div>
             </div >
             <div className="form-control-action">
-               <Button type="submit" variant="contained">Save</Button>
+               <Button type="submit" variant="contained" color="primary">Update Product Inventory</Button>
             </div>
       </form>
      

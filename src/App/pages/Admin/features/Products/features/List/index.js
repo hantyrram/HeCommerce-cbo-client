@@ -44,6 +44,7 @@ export const List = ({history, products, getProducts}) => {
             columnHeaders={columnHeaders}
             hidden={['_id']}
             onRowClick={activeTableSelectHandler}
+            noDataCaption = {<Link to="/catalog/products/add">Add your first product</Link>}
          />   
       </Feature>
       

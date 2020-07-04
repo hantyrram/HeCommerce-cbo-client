@@ -27,7 +27,7 @@ export default {
    PRODUCT_ADD: 'post:/cbo/apiv1/products',
    PRODUCT_READ: 'get:/cbo/apiv1/products/:productId',
    PRODUCT_DELETE: 'delete:/cbo/apiv1/products/:productId',
-   PRODUCT_UPDATE: 'patch:/cbo/apiv1/products/:productId',
+   PRODUCT_UPDATE: 'patch:/cbo/apiv1/products/:_id',
    PRODUCT$CATEGORY_EDIT: 'patch:/cbo/apiv1/products/:product_id/category',
    PRODUCT$IMAGES_ADD: 'post:/cbo/apiv1/products/:_id/images',
    PRODUCT$IMAGES_DELETE: 'delete:/cbo/apiv1/products/:product_id/images/:_id',
@@ -41,9 +41,9 @@ export default {
    PRODUCTATTRIBUTE$TERMS_REMOVE: 'patch:/cbo/apiv1/productattributes/:productattributeId/terms/remove',
    ROLE_LIST:'get:/cbo/apiv1/roles',
    ROLE_CREATE:'post:/cbo/apiv1/roles',
-   ROLE_READ:'get:/cbo/apiv1/roles/:roleId',
-   ROLE_DELETE:'delete:/cbo/apiv1/roles/:roleId',
-   ROLE_EDIT:'patch:/cbo/apiv1/roles/:roleId',
+   ROLE_READ:'get:/cbo/apiv1/roles/:_id',
+   ROLE_DELETE:'delete:/cbo/apiv1/roles/:_id',
+   ROLE_EDIT:'patch:/cbo/apiv1/roles/:_id',
    ROLE$PERMISSIONS_LIST: 'get:/cbo/apiv1/roles/:roleId/permissions',
    ROLE$PERMISSIONS_EDIT:'patch:/cbo/apiv1/roles/:roleId/permissions', //actually handled by role edit
    ROLE$PERMISSIONS_REMOVE:'patch:/cbo/apiv1/roles/:roleId/permissions/remove',//actually handled by role edit,no use for now

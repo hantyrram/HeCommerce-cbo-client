@@ -125,7 +125,9 @@ const ActiveTable = (props)=>{
                   props.onRowDelete ? 
                      <TableCell> 
                         <Button 
-                           startIcon={<DeleteIcon color="secondary"/>}
+                           variant="contained"
+                           color="secondary"
+                           startIcon={<DeleteIcon />}
                            size="small"
                            id="activetable-delete-btn" type="button" onClick={rowDeleteHandler(dObj)}>
                            Delete
@@ -191,7 +193,10 @@ const ActiveTable = (props)=>{
             <TableBody>
                {
                   !props.data || props.data.length === 0 ?
-                     <tr><td colspan={3} style={{textAlign:"center"}}> {props.noDataCaption || '< No Data >'}</td></tr>
+                     <tr>
+                        <td colspan={props.columnHeaders.length} style={{textAlign:"center"}}> {props.noDataCaption || '< No Data >'}</td>
+                        
+                     </tr>
                   : renderRows()
                }
             </TableBody>
@@ -237,7 +242,12 @@ ActiveTable.propTypes = {
    //e.g. {firstname: 'First Name'} where firstname is a key of data[i]
    columnHeaders: PropTypes.array, 
    hidden: PropTypes.array, // array of string which is the property of the data to hide, e.g. _id if you don't want to show id
-   onRowDelete: PropTypes.func, // a function that will be called when the delete button is clicked,
+   /**
+    * A function that will be called when the delete button is clicked,
+    * rowdata is passed as parameter.
+    * @param {object} rowdata The current data of the table row.
+    */
+   onRowDelete: PropTypes.func, 
    showHeadersOnNoData: PropTypes.bool, // Show the table header even on empty data
    /**
     * The text shown when there is no data, default = < No Data >

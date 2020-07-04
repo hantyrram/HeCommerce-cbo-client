@@ -72,10 +72,10 @@ export function View({match,location, userAccount, roles,getUserAccount,getRoles
                <span className="field-description">If true, password MUST be changed before the credential is granted authorization.</span>
             </div >
          </form>
-         <div style={{display: "flex", justifyContent: "space-between", width: "100%"}}>
+         <div style={{display: "flex", justifyContent: "space-between", width: "100%", alignItems: "center", margin: ".5em 0 .5em"}}>
             <div style={{display:"inline-block"}}><strong>Roles</strong></div>
             <hr />
-            <div style={{display:"inline-block"}}><Button onClick={addRoleClickHandler} variant="outlined" size="small" color="primary"> <AddIcon /> Add Role to User Account</Button></div>
+            <div style={{display:"inline-block"}}><Button onClick={addRoleClickHandler}  size="small" > <AddIcon size="small"/> </Button></div>
          </div>
          {/* UserAccount roles table */}
          <ActiveTable id="tbl-Admin-UserAccounts-View_userAccountRoles" data={userAccount.roles} 

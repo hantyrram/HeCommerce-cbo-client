@@ -43,7 +43,7 @@ const Login = ({authenticatedUser, lastAction, login, authenticate}) => {
    const onSubmitCallback = ({values}) => {
       login({payload: values});
    }
-   const { values,errors,onChange,onSubmit } = useForm({initialValues:{},onSubmitCallback});
+   const { values,errors,onChange,onSubmit } = useForm({initialValues:{username: 'demouser', password: "A11112222"},onSubmitCallback});
    
    let U_SID;
 

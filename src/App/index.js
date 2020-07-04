@@ -35,7 +35,7 @@ const THEME = {
          main: blue[500]
       },
       secondary: {
-         main: red[600]
+         main: "#ba6361"
       }
    }
 }

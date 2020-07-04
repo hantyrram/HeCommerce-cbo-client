@@ -42,7 +42,7 @@ function Form({ data = {}, addProduct, editProduct,updateProductCategory, produc
             <Tab label="Shipping" value={3} disabled={Boolean(!data._id)}/>
          </Tabs>
          <TabContent index={0} value={tabsValue}>  
-            <ProductForm product={data} productCategories={productCategories} updateProductCategory={updateProductCategory}/>
+            <ProductForm product={data} addProduct={addProduct} productCategories={productCategories} updateProductCategory={updateProductCategory}/>
          </TabContent>
          <TabContent index={1} value={tabsValue} >
             <ProductPricingForm product={data} editProduct={editProduct}/>

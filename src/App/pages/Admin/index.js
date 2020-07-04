@@ -48,7 +48,7 @@ export const Admin = ({authenticatedUser, logout}) => {
 
    return(
       <Router>
-         <Layout menu={AppConfig.adminMenu.menu} userAvatarUrl={userAvatarUrl} logoutHandler={logoutHandler}>
+         <Layout menu={AppConfig.adminMenu.menu} userAvatarUrl={userAvatarUrl} logoutHandler={logoutHandler}>            
             <Route render={(props)=>{
                let r = routes.find(r=> props.location.pathname.includes(r.path));
                   return (

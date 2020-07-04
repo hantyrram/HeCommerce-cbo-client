@@ -44,35 +44,58 @@ export const useActions = () => {
       = useApiRequest('PRODUCTCATEGORY_DELETE',dispatch);
 
    //Employees
-   let getEmployees = useApiRequest('EMPLOYEE_LIST',dispatch);
-   let getEmployee = useApiRequest('EMPLOYEE_READ',dispatch);
-   let editEmployee = useApiRequest('EMPLOYEE_EDIT',dispatch);
-   let uploadEmployeePhoto = useApiRequest('EMPLOYEE$PHOTO_EDIT',dispatch);
-   let addEmployee = useApiRequest('EMPLOYEE_ADD',dispatch);
+   const getEmployees 
+      = useApiRequest('EMPLOYEE_LIST',dispatch);
+   const getEmployee 
+      = useApiRequest('EMPLOYEE_READ',dispatch);
+   const editEmployee 
+      = useApiRequest('EMPLOYEE_EDIT',dispatch);
+   const uploadEmployeePhoto 
+      = useApiRequest('EMPLOYEE$PHOTO_EDIT',dispatch);
+   const addEmployee 
+      = useApiRequest('EMPLOYEE_ADD',dispatch);
 
    //UserAccounts
-   let getUserAccounts = useApiRequest('USERACCOUNT_LIST',dispatch, ({responseData})=>{
+   const getUserAccounts = useApiRequest('USERACCOUNT_LIST',dispatch, ({responseData})=>{
       return responseData.resource;
    });
 
-   let getUserAccount = useApiRequest('USERACCOUNT_READ',dispatch);
+   const getUserAccount = useApiRequest('USERACCOUNT_READ',dispatch);
 
-   let addRoleToUserAccount = useApiRequest('USERACCOUNT$ROLES_ADD',dispatch,({requestParams,responseData})=>{
+   const addRoleToUserAccount = useApiRequest('USERACCOUNT$ROLES_ADD',dispatch,({requestParams,responseData})=>{
       return {username: requestParams.username, role: responseData.resource};
    });
 
    //Roles
-   let getRoles = useApiRequest('ROLE_LIST',dispatch);
-   let deleteRoleFromUserAccount =  useApiRequest('USERACCOUNT$ROLES_DELETE',dispatch,({requestParams})=>{
-      return {username: requestParams.username, roleId: requestParams.roleId}
-   });
-   const verifyEmployee = useApiRequest('EMPLOYEE_VERIFY',dispatch);
-   const generateCredential = useApiRequest('USERACCOUNT$CREDENTIAL$GENERATE_EXEC',dispatch);   
-   const createUserAccountCredential = useApiRequest('USERACCOUNT$CREDENTIAL_CREATE',dispatch);
+   const getRoles 
+      = useApiRequest('ROLE_LIST',dispatch);
+   const deleteRole 
+      = useApiRequest('ROLE_DELETE',dispatch);
+   const deleteRoleFromUserAccount
+       =  useApiRequest('USERACCOUNT$ROLES_DELETE',dispatch,({requestParams})=>{
+         return {username: requestParams.username, roleId: requestParams.roleId}
+      });
+   const createRole 
+      = useApiRequest('ROLE_CREATE',dispatch);
+   const editRole 
+      = useApiRequest('ROLE_EDIT',dispatch);
+
+   const verifyEmployee 
+      = useApiRequest('EMPLOYEE_VERIFY',dispatch);
+   const generateCredential 
+      = useApiRequest('USERACCOUNT$CREDENTIAL$GENERATE_EXEC',dispatch);   
+   const createUserAccountCredential 
+      = useApiRequest('USERACCOUNT$CREDENTIAL_CREATE',dispatch);
 
    //products
-   const addProduct = useApiRequest('PRODUCT_CREATE',dispatch);
-   const updateProductCategory = useApiRequest('PRODUCT$CATEGORY_EDIT',dispatch);
+   const addProduct 
+      = useApiRequest('PRODUCT_ADD',dispatch);
+   const editProduct 
+      = useApiRequest('PRODUCT_UPDATE',dispatch);
+   const updateProductCategory 
+      = useApiRequest('PRODUCT$CATEGORY_EDIT',dispatch);
+
+
 
    return {
       authenticate,
@@ -95,12 +118,18 @@ export const useActions = () => {
       getUserAccounts,
       getUserAccount,
       getRoles,
+      createRole,
+      deleteRole,
       addRoleToUserAccount,
       deleteRoleFromUserAccount,
+      editRole,
       generateCredential,
       createUserAccountCredential,
       addProduct,
-      updateProductCategory
+      editProduct,
+      updateProductCategory,
+
+      
    }
 }
 

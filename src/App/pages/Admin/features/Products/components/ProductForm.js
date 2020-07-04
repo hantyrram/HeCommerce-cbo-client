@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useRef } from 'react';
 
 import CategoryTree from 'App/pages/Admin/features/Categories/components/CategoryTree';
 import Button from '@material-ui/core/Button';
@@ -10,7 +10,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import {makeStyles} from '@material-ui/core';
 import useForm from 'hooks/useForm';
 
-const useChipStyle = makeStyles({  
+const useStyle = makeStyles({  
    root: {
       width: "fit-content",
       marginLeft: "1em"
@@ -18,7 +18,7 @@ const useChipStyle = makeStyles({
 })
 
 export default function ProductForm({ product = {}, productCategories, addProduct, editProduct, updateProductCategory}){
-   const chipClasses = useChipStyle();
+   const classes = useStyle();
    const onSubmitCallback = ({values,changedValues})=>{
       if(!product._id){
          addProduct({payload: changedValues });
@@ -30,21 +30,28 @@ export default function ProductForm({ product = {}, productCategories, addProduc
       })
    }
 
-   let {values, onChange, onSubmit, errors,changedValues,setFormFieldValue} = useForm({initialValues: product, onSubmitCallback });
-   
-   let [selectedCategory,setSelectedCategory] = useState( product.category || {_id:'root', name: 'Root'} );
-   let [openSelectCategoryDialog,setOpenSelectCategoryDialog] = useState(false);
+   const {values, onChange, onSubmit, errors,changedValues,setFormFieldValue} 
+      = useForm({ initialValues: product, onSubmitCallback });
+   const [selectedCategory,setSelectedCategory] 
+      = useState( product.category || {_id:'root', name: 'Root'} );
+   const [previousCategoryValue, setPreviousCategoryValue] 
+      = useState();
+   const [openSelectCategoryDialog,setOpenSelectCategoryDialog] 
+      = useState(false);
+
+
 
    /**
     * Only selects the category from the category tree. Cached as state (selectedCategory) for use later.
     */
    const categoriesOnSelectHandler = s => {
-      console.log(s);
+      
       setSelectedCategory(s);
    }
 
    const selectCategoryModalTriggerHandler = (e)=>{
       e.preventDefault();
+      setPreviousCategoryValue({...selectedCategory});
       setOpenSelectCategoryDialog(true);
    }
 
@@ -63,6 +70,7 @@ export default function ProductForm({ product = {}, productCategories, addProduc
    }
 
    const selectCategoryModalCancelHandler = (e) => {
+      setSelectedCategory(previousCategoryValue);
       setOpenSelectCategoryDialog(false);
    }
 
@@ -74,28 +82,37 @@ export default function ProductForm({ product = {}, productCategories, addProduc
       // setProduct(Object.assign({...p},{category:null}));
       values.category = null;
    }
-   return(
-     
+   
+   console.log(product);
 
+   return(
          <form id="product-add" action="#" onSubmit={onSubmit} className="grid-form">   
-            <div className="form-control">
-               <span>
-                  <a id="selectcategory-dialog-trigger" href="#" onClick={selectCategoryModalTriggerHandler} >
-                     {values.category? 'Change Product Category': 'Select Product Category'}
-                  </a>
-               </span>
-               {/* <span> */}
-                  {/* using hidden input element to be able to utilize onChange of useForm */}
-                  {/* Chip is used as some kind of proxy for the ui */}
-                  {/* <input ref={categoryRef} type="hidden" name={values.category} className="form-control-input"/>  */}
+            {
+               product._id ?
+               <div className="form-control">
                   {
-                      product.category ? 
-                        <Chip size="small" className={chipClasses.root} label={selectedCategory.name} onDelete={removeCategory} /> 
-                     : null
+                     <span>
+                        <a id="selectcategory-dialog-trigger" href="#" onClick={selectCategoryModalTriggerHandler} >
+                           {values.category? 'Change Product Category': 'Select Product Category'}
+                        </a>
+                     </span>
                   }
-               {/* </span> */}
-               
-            </div>   
+                  
+                  {/* <span> */} 
+                     {/* using hidden input element to be able to utilize onChange of useForm */}
+                     {/* Chip is used as some kind of proxy for the ui */}
+                     {/* <input ref={categoryRef} type="hidden" name={values.category} className="form-control-input"/>  */}
+                     {
+                        product.category ? 
+                           <Chip className={classes.root} label={selectedCategory.name} onDelete={removeCategory} /> 
+                        : null
+                     }
+                  {/* </span> */}
+                  
+               </div>   
+               :null
+            }
+            
             <div className="form-control">
                <label htmlFor="name" className="required">Product Name</label>
                <input type="text" name="name" id="product-name" value={values.name} onChange={productNameChangeHandler} minLength="4" className="form-control-input large" required/>                  
@@ -110,7 +127,7 @@ export default function ProductForm({ product = {}, productCategories, addProduc
             </div >
             
             <div className="form-control">
-               <label htmlFor="name" className="required">Slug</label>
+               <label htmlFor="name" className="required">Friendly Url (slug)</label>
                <input type="text" name="slug" id="product-slug" 
                   // value={values.slug || values.name.replace(/\s/g,'-')} 
                   value={values.slug} 
@@ -132,8 +149,9 @@ export default function ProductForm({ product = {}, productCategories, addProduc
                </select>
             </div> */}
             
-            <div className="form-control">
+            <div className="form-control" >
                <label htmlFor="description">Product Description</label>
+               {/* <Editor ref={editor} editorState={editorState} onChange={(editorState => console.log(editorState))}/> */}
                <textarea style={{minHeight:"10em",maxWidth:"100%"}}type="text" 
                   name="description" id="product-description" value={values.description} onChange={onChange} className="form-control-input"/>
                <label className="field-description">This information will be displayed alongside the product on the customers screen.</label>
@@ -147,9 +165,9 @@ export default function ProductForm({ product = {}, productCategories, addProduc
                <input type="text" name="upc" value={product.upc} onChange={onChange} />
             </div> */}
             <div className="form-control">
-               <label htmlFor="netCost" className="required">Product Acquisition Cost</label>
+               <label htmlFor="netCost" className="required">Cost</label>
                <input type="text" name="netCost" value={values.netCost} onChange={onChange} className="form-control-input"/>
-               <label className="field-description">The cost of acquiring the product</label>
+               <label className="field-description">The cost of the product. How much was paid for the product.</label>
             </div>      
             
             <div className="form-control-action">

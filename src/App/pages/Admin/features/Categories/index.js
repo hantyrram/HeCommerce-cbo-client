@@ -36,6 +36,9 @@ function ProductCategories({history, getCategories,createCategory,deleteCategory
       createCategory({payload: category});
    }
 
+
+   function onEdit(){}
+
    return(
       // !productCategories || productCategories.length === 0 ? 'No Product Categories' : 
       <Feature 
@@ -50,6 +53,7 @@ function ProductCategories({history, getCategories,createCategory,deleteCategory
                onSelect={onSelect} 
                onAdd={onAdd} 
                onDelete={onDelete}
+               onEdit={onEdit}
             />
          </div>
       </Feature>
