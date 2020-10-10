@@ -1,6 +1,6 @@
 import React, { useState,useRef } from 'react';
 
-import CategoryTree from 'App/pages/Admin/features/Categories/components/CategoryTree';
+import CategoryTree from '../../Categories/components/CategoryTree';
 import Button from '@material-ui/core/Button';
 import Chip from '@material-ui/core/Chip';
 import Dialog from '@material-ui/core/Dialog';
@@ -112,12 +112,18 @@ export default function ProductForm({ product = {}, productCategories, addProduc
                </div>   
                :null
             }
-            
+            <div className="form-control">
+               <label htmlFor="universalProductCode" className="required">Universal Product Code(UPC)</label>
+               <input type="text" name="uuniversalProductCode" id="universalProductCode" value={values.universalProductCode} onChange={onChange} minLength="4" className="form-control-input large" />                  
+               <label className="field-description">Scanned barcode</label>
+            </div>
+
             <div className="form-control">
                <label htmlFor="name" className="required">Product Name</label>
                <input type="text" name="name" id="product-name" value={values.name} onChange={productNameChangeHandler} minLength="4" className="form-control-input large" required/>                  
                <label className="field-description">The display name of the product</label>
             </div>
+            
             <div className="form-control">
                <label htmlFor="type" className="required">Product Type</label>
                <select name="type" id="product-type" value={values.type} onChange={onChange} className="form-control-input">
@@ -167,7 +173,7 @@ export default function ProductForm({ product = {}, productCategories, addProduc
             <div className="form-control">
                <label htmlFor="netCost" className="required">Cost</label>
                <input type="text" name="netCost" value={values.netCost} onChange={onChange} className="form-control-input"/>
-               <label className="field-description">The cost of the product. How much was paid for the product.</label>
+               <label className="field-description">The (item) cost of the product.</label>
             </div>      
             
             <div className="form-control-action">

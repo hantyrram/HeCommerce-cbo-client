@@ -30,7 +30,7 @@ export default function ProductInventoryForm({ product, editProduct}){
 
    const onSubmitCallback = ({values,changedValues})=>{
       editProduct({
-            params: {productId: product._id}, 
+            params: {_id: product._id}, 
             payload: { inventory: changedValues }
       });
    };

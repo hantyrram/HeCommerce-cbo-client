@@ -22,7 +22,7 @@ import Button from '@material-ui/core/Button';
 
 // const THEME = 'dark';
 
-const THEME = {
+const THEME = {   
    primaryBackgroundZero:  "#040303eb",
    primaryBackgroundOne: "#040303d9",
    primaryBackgroundTwo: "#04030378",

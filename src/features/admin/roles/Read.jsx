@@ -1,7 +1,7 @@
 import React, { useContext,useEffect } from 'react';
 import useAppState from 'appstore/useAppState';
 import useApiRequest from 'api/useApiRequest';
-import feature from 'features/feature';
+import feature from '../../feature';
 import {Link} from 'react-router-dom';
 import FeatureShortcutLink from 'components/FeatureShortcutLink';
 import useForm from 'hooks/useForm';

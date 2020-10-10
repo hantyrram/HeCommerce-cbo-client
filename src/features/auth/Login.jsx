@@ -4,7 +4,7 @@ import useForm from 'hooks/useForm';
 import useApiRequest from 'api/useApiRequest';
 import useAppState from 'appstore/useAppState';
 import {ErrorBox} from '../feature';
-import { subscribe } from '../../actionEvent';
+import { subscribe } from 'actionEvent';
 import './Login.css';
 export default function Login (props){
 

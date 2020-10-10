@@ -1,4 +1,4 @@
-import { useReducer,useEffect } from "react";
+import { useReducer } from "react";
 import reducer from './reducer';
 
 export const STORE_NAME = 'ht-state-x';

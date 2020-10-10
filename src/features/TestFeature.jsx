@@ -1,6 +1,6 @@
 import React, { useEffect, useState,useRef } from 'react';
 import {BrowserRouter as Router,Route,Switch,Link} from 'react-router-dom';
-import Feature from 'components/Feature.jsx';
+import Feature from 'components/Feature';
 import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 import MLink from '@material-ui/core/Link';

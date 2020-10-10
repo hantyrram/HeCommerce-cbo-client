@@ -56,15 +56,18 @@ export const useActions = () => {
       = useApiRequest('EMPLOYEE_ADD',dispatch);
 
    //UserAccounts
-   const getUserAccounts = useApiRequest('USERACCOUNT_LIST',dispatch, ({responseData})=>{
-      return responseData.resource;
-   });
+   const getUserAccounts 
+      = useApiRequest('USERACCOUNT_LIST',dispatch, ({responseData})=>{
+         return responseData.resource;
+      });
 
-   const getUserAccount = useApiRequest('USERACCOUNT_READ',dispatch);
+   const getUserAccount 
+      = useApiRequest('USERACCOUNT_READ',dispatch);
 
-   const addRoleToUserAccount = useApiRequest('USERACCOUNT$ROLES_ADD',dispatch,({requestParams,responseData})=>{
-      return {username: requestParams.username, role: responseData.resource};
-   });
+   const addRoleToUserAccount 
+      = useApiRequest('USERACCOUNT$ROLES_ADD',dispatch,({requestParams,responseData})=>{
+         return {username: requestParams.username, role: responseData.resource};
+      });
 
    //Roles
    const getRoles 
@@ -94,6 +97,10 @@ export const useActions = () => {
       = useApiRequest('PRODUCT_UPDATE',dispatch);
    const updateProductCategory 
       = useApiRequest('PRODUCT$CATEGORY_EDIT',dispatch);
+   const addProductImage 
+      = useApiRequest('PRODUCT$IMAGES_ADD',dispatch);
+   const removeProductImage
+      = useApiRequest('PRODUCT$IMAGES_REMOVE',dispatch);
 
 
 
@@ -127,9 +134,9 @@ export const useActions = () => {
       createUserAccountCredential,
       addProduct,
       editProduct,
-      updateProductCategory,
-
-      
+      addProductImage,
+      removeProductImage,
+      updateProductCategory
    }
 }
 

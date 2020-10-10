@@ -12,4 +12,13 @@
    grid-template-areas: "left right"; */
 }
 
+.Admin{
+   min-width: 100vw;
+   display: flex;
+   /* display: grid; */
+   /* grid-template-columns: 1fr 4fr;
+   grid-template-areas: "left right"; */
+}
+
+
 

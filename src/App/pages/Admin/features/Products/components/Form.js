@@ -7,6 +7,7 @@ import ProductForm from './ProductForm';
 import ProductInventoryForm from './ProductInventoryForm';
 import ProductPricingForm from './ProductPricingForm';
 import ProductShippingForm from './ProductShippingForm';
+import ProductImages from './Images';
 
 function TabContent({children, index,value}){
    return(
@@ -24,7 +25,7 @@ function TabContent({children, index,value}){
  * Employee Form
  * 
  */
-function Form({ data = {}, addProduct, editProduct,updateProductCategory, productCategories}) {
+function Form({ data = {}, addProduct, editProduct,updateProductCategory, productCategories, addProductImage,settings}) {
    
    const [tabsValue, setTabsValue] = useState(0);
 
@@ -40,18 +41,32 @@ function Form({ data = {}, addProduct, editProduct,updateProductCategory, produc
             <Tab label="Pricing" value={1} disabled={Boolean(!data._id)}/>
             <Tab label="Inventory" value={2} disabled={Boolean(!data._id)}/>
             <Tab label="Shipping" value={3} disabled={Boolean(!data._id)}/>
+            <Tab label="Images" value={4} disabled={Boolean(!data._id)}/>
          </Tabs>
          <TabContent index={0} value={tabsValue}>  
-            <ProductForm product={data} addProduct={addProduct} productCategories={productCategories} updateProductCategory={updateProductCategory}/>
+            <ProductForm 
+               product={data} 
+               addProduct={addProduct} 
+               productCategories={productCategories} 
+               updateProductCategory={updateProductCategory}
+            />
          </TabContent>
          <TabContent index={1} value={tabsValue} >
-            <ProductPricingForm product={data} editProduct={editProduct}/>
+            <ProductPricingForm product={data} editProduct={editProduct} currency={settings.defaultCurrency}/>
          </TabContent>
          <TabContent index={2} value={tabsValue} disabled>
             <ProductInventoryForm product={data} editProduct={editProduct}/>
          </TabContent>
          <TabContent index={3} value={tabsValue} >
-            <ProductShippingForm product={data} editProduct={editProduct}/>
+            <ProductShippingForm 
+               product={data} 
+               editProduct={editProduct} 
+               massUnit={settings.defaultMassUnit} 
+               lengthUnit={settings.defaultLengthUnit}
+            />
+         </TabContent>
+         <TabContent index={4} value={tabsValue} >
+            <ProductImages product={data} addProductImage={addProductImage}/>
          </TabContent>
       </React.Fragment>
    )

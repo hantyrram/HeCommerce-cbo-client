@@ -28,6 +28,8 @@ export default {
    PRODUCT_READ: 'get:/cbo/apiv1/products/:productId',
    PRODUCT_DELETE: 'delete:/cbo/apiv1/products/:productId',
    PRODUCT_UPDATE: 'patch:/cbo/apiv1/products/:_id',
+   PRODUCT$IMAGE_ADD: 'post:/cbo/apiv1/products/:_id/images',
+   PRODUCT$IMAGE_REMOVE: 'delete:/cbo/apiv1/products/:_id/images/:image_id',
    PRODUCT$CATEGORY_EDIT: 'patch:/cbo/apiv1/products/:product_id/category',
    PRODUCT$IMAGES_ADD: 'post:/cbo/apiv1/products/:_id/images',
    PRODUCT$IMAGES_DELETE: 'delete:/cbo/apiv1/products/:product_id/images/:_id',

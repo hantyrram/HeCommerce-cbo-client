@@ -3,7 +3,13 @@ import Feature from 'components/Feature';
 import connect from 'appstore/connect';
 import Form from '../../components/Form';
 
-function View({product, productCategories,getCategories,updateProductCategory,editProduct}){
+function View({
+   product, 
+      productCategories, 
+         getCategories, 
+         addProductImage,
+            updateProductCategory, 
+               editProduct, settings }){
  
    //Prefetch productCategories
    useEffect(()=>{
@@ -17,7 +23,10 @@ function View({product, productCategories,getCategories,updateProductCategory,ed
             data = {product}
             editProduct={editProduct} 
             updateProductCategory={updateProductCategory}
-            productCategories={productCategories} />
+            productCategories={productCategories}
+            addProductImage={addProductImage}
+            settings = { settings }
+             />
       </Feature>
    )
 }
@@ -25,7 +34,7 @@ function View({product, productCategories,getCategories,updateProductCategory,ed
 
 export default connect({
    Component: View,
-   actionsToProps: ['editProduct','getCategories','updateProductCategory'],
+   actionsToProps: ['editProduct','getCategories','updateProductCategory','addProductImage'],
    stateToProps: (state,ownProps) => {
       let product;
       // if(ownProps.location.state && ownProps.location.state.product 
@@ -37,7 +46,7 @@ export default connect({
       
       product = state.products.find(p => p.slug === ownProps.match.params.slug);
 
-      return { product, productCategories: state.productCategories }
+      return { product, productCategories: state.productCategories, settings: state.settings}
    }
 })
 

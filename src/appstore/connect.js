@@ -12,7 +12,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import useAppState from './useAppState';
-import { useActions } from '../actions';
+import { useActions } from 'actions';
 
 /**
  * Connects A Component to the store, 

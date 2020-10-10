@@ -2,7 +2,6 @@ import React, {useEffect,useState} from 'react';
 import useAppState from 'appstore/useAppState';
 import {BrowserRouter as Router,Route,Switch,Link} from 'react-router-dom';
 import FeatureContextMenu from 'components/FeatureContextMenu';
-import feature from 'features/feature';
 import { 
    ProductForm,PricingForm,ProductInventoryForm,ProductShippingForm
 } from './forms';

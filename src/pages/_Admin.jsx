@@ -28,7 +28,7 @@ const RoleCreate = React.lazy(()=>import(/*webpackChunkName: "feature.admin.role
 const RoleRead = React.lazy(()=>import(/*webpackChunkName: "feature.admin.roles.read" */'features/admin/roles/Read'));
 const RoleEdit= React.lazy(()=>import(/*webpackChunkName: "feature.admin.roles.edit" */'features/admin/roles/Edit'));
 const Permissions = React.lazy(()=>import(/*webpackChunkName: "feature.admin.permission.list" */'features/admin/Permissions'));
-const Employees = React.lazy(()=> import(/*webpackChunkName: "feature.employees" */'features/employee/index'));
+const Employees = React.lazy(()=> import(/*webpackChunkName: "feature.employees" */'features/employee
 
 // const EmployeeAdd = React.lazy(()=> import(/*webpackChunkName: "feature.personnel_management.employee.add" */'features/personnel_management/employee/Add'));
 const EmployeeView = React.lazy(()=> import(/*webpackChunkName: "feature.employee" */'features/employee/View'));
@@ -37,7 +37,7 @@ const UserAccounts = React.lazy(()=> import(/*webpackChunkName: "feature.admin.u
 const UserAccountRead = React.lazy(()=> import(/*webpackChunkName: "feature.admin.userAccount.read" */'features/admin/useraccount/Read'));
 const ProductCategories = React.lazy(()=> import(/*webpackChunkName: "feature.productcategory" */'features/productcategory'));
 const ProductCategoryCreate = React.lazy(()=> import(/*webpackChunkName: "feature.productcategory.create" */'features/productcategory/Create'));
-const Products = React.lazy(()=> import(/*webpackChunkName: "feature.product" */'features/product/index'));
+const Products = React.lazy(()=> import(/*webpackChunkName: "feature.product" */'features/product
 const ProductAdd = React.lazy(()=> import(/*webpackChunkName: "feature.product.add" */'features/product/Add'));
 const ProductView = React.lazy(()=> import(/*webpackChunkName: "feature.product.view" */'features/product/View'));
 const ProductAttributes = React.lazy(()=> import(/*webpackChunkName: "feature.productattribute" */'features/productattribute'));

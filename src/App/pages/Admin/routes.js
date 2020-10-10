@@ -5,33 +5,33 @@
 import React from 'react';
 
 const Products =
-    React.lazy(()=> import(/*webpackChunkName: "feature.products" */'App/pages/Admin/features/Products'));
+    React.lazy(()=> import(/*webpackChunkName: "feature.products" */'./features/Products'));
 const AddProduct = 
-   React.lazy(()=> import(/*webpackChunkName: "feature.products.add" */'App/pages/Admin/features/Products/features/Add'));
+   React.lazy(()=> import(/*webpackChunkName: "feature.products.add" */'./features/Products/features/Add'));
 const ViewProduct =
-    React.lazy(()=> import(/*webpackChunkName: "feature.products.view" */'App/pages/Admin/features/Products/features/View'));
+    React.lazy(()=> import(/*webpackChunkName: "feature.products.view" */'./features/Products/features/View'));
 const ProductCategories = 
-   React.lazy(()=> import(/*webpackChunkName: "feature.categories" */'App/pages/Admin/features/Categories'));
+   React.lazy(()=> import(/*webpackChunkName: "feature.categories" */'./features/Categories'));
 const ProductAttributes = 
-   React.lazy(()=> import(/*webpackChunkName: "feature.attributes" */'App/pages/Admin/features/Attributes'));   
+   React.lazy(()=> import(/*webpackChunkName: "feature.attributes" */'./features/Attributes'));
 const Employees = 
-   React.lazy(()=> import(/*webpackChunkName: "feature.employees" */'App/pages/Admin/features/Employees'));   
+   React.lazy(()=> import(/*webpackChunkName: "feature.employees" */'./features/Employees'));
 const AddEmployee = 
-   React.lazy(()=> import(/*webpackChunkName: "feature.employees.add" */'App/pages/Admin/features/Employees/features/Add'));    
+   React.lazy(()=> import(/*webpackChunkName: "feature.employees.add" */'./features/Employees/features/Add'));
 const ViewEmployee = 
-   React.lazy(()=> import(/*webpackChunkName: "feature.employees.view" */'App/pages/Admin/features/Employees/features/View'));    
+   React.lazy(()=> import(/*webpackChunkName: "feature.employees.view" */'./features/Employees/features/View'));
 const UserAccounts = 
-   React.lazy(()=> import(/*webpackChunkName: "feature.useraccounts" */'App/pages/Admin/features/UserAccounts'));    
+   React.lazy(()=> import(/*webpackChunkName: "feature.useraccounts" */'./features/UserAccounts'));
 const ViewUserAccount = 
-   React.lazy(()=> import(/*webpackChunkName: "feature.useraccounts.view" */'App/pages/Admin/features/UserAccounts/features/View'));       
+   React.lazy(()=> import(/*webpackChunkName: "feature.useraccounts.view" */'./features/UserAccounts/features/View'));
 const CreateUserAccount = 
-   React.lazy(()=> import(/*webpackChunkName: "feature.useraccounts.create" */'App/pages/Admin/features/UserAccounts/features/Create'));       
+   React.lazy(()=> import(/*webpackChunkName: "feature.useraccounts.create" */'./features/UserAccounts/features/Create'));
 const Roles = 
-   React.lazy(()=> import(/*webpackChunkName: "feature.roles" */'App/pages/Admin/features/Roles'));       
+   React.lazy(()=> import(/*webpackChunkName: "feature.roles" */'./features/Roles'));
 const CreateRole = 
-   React.lazy(()=> import(/*webpackChunkName: "feature.roles.create" */'App/pages/Admin/features/Roles/features/Create'));       
+   React.lazy(()=> import(/*webpackChunkName: "feature.roles.create" */'./features/Roles/features/Create'));
 const ViewRole = 
-   React.lazy(()=> import(/*webpackChunkName: "feature.roles.view" */'App/pages/Admin/features/Roles/features/View'));
+   React.lazy(()=> import(/*webpackChunkName: "feature.roles.view" */'./features/Roles/features/View'));
 
 const CATALOG = "Catalog";
 const ORDERS = "Orders";

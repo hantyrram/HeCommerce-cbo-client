@@ -57,7 +57,8 @@ export default function ProductShippingForm({product, editProduct}){
                } 
                className={classes.input} 
                value={shipping.productWeight} 
-               onChange={onChange} />                  
+               onChange={onChange} 
+            />                  
          </div >
          <h4>Dimension</h4>
          <div className="form-control">

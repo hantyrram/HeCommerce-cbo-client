@@ -1,6 +1,19 @@
 
 import apiRequestActionTypes from '../api/apiRequestActionTypes';
-
+import currencies from './Common-Currency.json';
+import shippingZones from './reducers/shippingZones';
+import products from './reducers/products';
+import productCategories from './reducers/productCategories';
+import employees from './reducers/employees';
+import attributes from './reducers/attributes';
+import roles from './reducers/roles';
+import settings from './reducers/settings';
+import states from './reducers/states';
+import userAccounts from './reducers/userAccounts';
+import authenticatedUser from './reducers/authenticatedUser';
+import permissions from './reducers/permissions';
+import countries from './reducers/countries';
+import cities from './reducers/cities';
 //NOTE: MAKE SURE TO RETURN THE STATE BY DEFAULT
 
 const productsReducer = (productsState = [], action)=>{
@@ -44,15 +57,12 @@ const productsReducer = (productsState = [], action)=>{
       }
 
       case apiRequestActionTypes.PRODUCT$IMAGES_ADD_OK: {
-         //payload = Product.Image
-         let product = newState.find(p => p._id === action.payload.metadata.owner);
-         console.log(product);
-         console.log(action.payload);
-         let images = [...product.images, action.payload];
-         Object.assign(product, { images } );
-         console.log(newState);
-         return newState;
+         let product = newState.find(p => p._id === action.payload.product_id);
+         if( product){
+            product.images = action.payload;
+         }
       }
+
       case apiRequestActionTypes.PRODUCT$IMAGES_DELETE_OK: {
          //payload = {product_id, _id} where _id = image id
          let product = newState.find(p => p._id === action.payload.product_id);
@@ -414,7 +424,17 @@ const authenticatedUserReducer = ( authenticatedUserReducer = null, action)=>{
    return authenticatedUserReducer;
 }
 
-const settingsReducer = (settings = {}, action ) => {
+const settingsMock = {
+   defaultMassUnit: 'kg',
+   defaultLengthUnit: 'cm',
+   defaultCurrency: currencies['PHP'],
+   taxRates: [
+      { _id: 1, name: 'No Tax', rate: 0 }
+   ],
+   currencies
+};
+
+const settingsReducer = (settings = settingsMock, action ) => {
    let settingState = {...settings};
 
    return settingState;
@@ -463,23 +483,23 @@ export default (state, action)=>{
       lastActionMessage: (action.payload || {}).message,
       lastActionError: (action.payload || {}).error, 
       // identity: identityReducer(state.identity,action),
-      authenticatedUser: authenticatedUserReducer(state.authenticatedUser,action),
+      authenticatedUser: authenticatedUser(state.authenticatedUser,action),
       apis: apisReducer(state.apis,action),
-      roles: rolesReducer(state.roles,action),
-      employees: employeesReducer(state.employees,action),
-      userAccounts: userAccountsReducer(state.userAccounts,action),
-      products: productsReducer(state.products,action),
-      productCategories: productCategoriesReducer(state.productCategories,action),
-      attributes: attributesReducer(state.attributes,action),
-      permissions: permissionsReducer(state.permissions,action),
+      roles: roles(state.roles,action),
+      employees: employees(state.employees,action),
+      userAccounts: userAccounts(state.userAccounts,action),
+      products: products(state.products,action),
+      productCategories: productCategories(state.productCategories,action),
+      attributes: attributes(state.attributes,action),
+      permissions: permissions(state.permissions,action),
       resources: resourcesReducer(state.resources,action),
       //helpersData
-      countries: countriesReducer(state.countries,action),
-      states: statesReducer(state.states,action),
-      cities: citiesReducer(state.cities,action),
+      countries: countries(state.countries,action),
+      states: states(state.states,action),
+      cities: cities(state.cities,action),
       storeSettings: storeSettingsReducer(state.storeSettings,action),
-      shippingZones: shippingZonesReducer(state.shippingZones,action),
-      settings: settingsReducer(state.settings, action),
+      shippingZones: shippingZones(state.shippingZones,action),
+      settings: settings(state.settings, action),
       util: utilReducer(state.util,action),
       psgc: psgcReducer(state.psgc,action)
    };

@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import useForm from 'hooks/useForm';
 import useAppState from 'appstore/useAppState';
 import useApiRequest from 'api/useApiRequest';
-import feature from 'features/feature';
+import feature from '../../feature';
 //role.name = 35 chars max 3 chars min required
 //role.label = 40 chars max 
 //role.description = 60 chars max

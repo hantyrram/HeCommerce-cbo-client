@@ -3,13 +3,14 @@ import Feature from 'components/Feature';
 import connect from 'appstore/connect';
 import Form from '../../components/Form';
 
-function Add({addProduct,productCategories,getCategories,updateProductCategory,editProduct}){
+function Add({addProduct,productCategories,getCategories,updateProductCategory,editProduct,settings}){
  
    //Prefetch productCategories
    useEffect(()=>{
       getCategories();
    },[])
 
+   
    return(
       //if ok,save on product,cancel don;t save
       <Feature title ="Add New Product">
@@ -17,7 +18,9 @@ function Add({addProduct,productCategories,getCategories,updateProductCategory,e
             addProduct={addProduct} 
             editProduct={editProduct} 
             updateProductCategory={updateProductCategory}
-            productCategories={productCategories} />
+            productCategories={productCategories} 
+            settings={settings}
+         />
       </Feature>
    )
 }
@@ -26,7 +29,7 @@ function Add({addProduct,productCategories,getCategories,updateProductCategory,e
 export default connect({
    Component: Add,
    actionsToProps: ['addProduct','editProduct','getCategories','updateProductCategory'],
-   stateToProps: ['productCategories']
+   stateToProps: ['productCategories','settings']
 })
 
 

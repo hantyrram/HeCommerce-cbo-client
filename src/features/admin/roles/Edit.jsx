@@ -1,7 +1,7 @@
 import React, { useEffect,useState } from 'react';
 import useAppState from 'appstore/useAppState';
 import FeatureShortcutLink from 'components/FeatureShortcutLink';
-import feature from 'features/feature';
+import feature from '../../feature';
 import useApiRequest from 'api/useApiRequest';
 
 
